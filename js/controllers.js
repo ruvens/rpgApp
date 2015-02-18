@@ -47,9 +47,7 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 			if (Math.random() <= $scope.item.chance) {
 				if ($scope.item.list.length <= $scope.item.limit) {
 					$scope.item.new($scope.stage);					
-				} else {
-					$scope.charater.gainGold(0);
-				}
+				} 
 			}
 
 			$scope.character.hp = $scope.character.hpmax;
