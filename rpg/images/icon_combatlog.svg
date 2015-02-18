@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="30" height="30" viewBox="0, 0, 40, 40">
+  <g id="Layer_1">
+    <path d="M20,40 C8.954,40 0,31.046 0,20 C0,8.954 8.954,0 20,0 C31.046,0 40,8.954 40,20 C40,31.046 31.046,40 20,40 z" fill="#444444"/>
+    <path d="M18.156,27.219 L28.281,27.219" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round"/>
+    <g>
+      <path d="M11.75,7.938 L26.438,7.938 L30.688,12.562 L30.688,30.125 L11.75,30.125 L11.75,7.938 z" fill-opacity="0" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="6"/>
+      <g>
+        <path d="M25.938,8.938 L29.688,12.938 L25.938,12.922 L25.938,8.938 z" fill="#FFFFFF"/>
+        <path d="M25.938,8.938 L29.688,12.938 L25.938,12.922 L25.938,8.938 z" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+    </g>
+    <path d="M15,23.5 L16.906,25.375 L14.844,27.219" fill-opacity="0" stroke="#FFFFFF" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

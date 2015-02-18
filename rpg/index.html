@@ -1,0 +1,182 @@
+<!doctype html>
+<html ng-app="rpgApp">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Application</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/app.css">
+		
+		<!-- Load Java Script Framework -->
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-sanitize.min.js"></script>
+		<script src="js/ui-bootstrap.min.js"></script>
+		<script src="js/rpgApp.js"></script>
+		<script src="js/character.js"></script>
+		<script src="js/directives.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/services.js"></script>
+	</head>
+
+	<body ng-controller="rpgController">
+		<!-- Header element -->
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target="#navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#/">Application</a>
+				</div>
+			</div>
+		</nav>
+		
+		<!-- Body element -->
+		<div class="container-fluid">
+			<!-- Level chooser -->
+			<div class="row main-row">
+				<div class="col-md-12 center">
+					<img src="images/arrowleft.svg" alt="Arrow left" ng-click="decStage()"></img>
+					<span id="stage">Stage {{ stage }}</span>
+					<img src="images/arrowright.svg" alt="Arrow right" ng-click="incStage()"></img>
+				</div>
+			</div>
+			
+			<!-- Character Part -->
+			<div class="row main-row">
+				<div class="col-md-8">
+					
+					<!-- Combat part -->
+					<div class="row">
+						
+						<!-- Player part -->
+						<div class="col-md-6">
+							<p>
+								<span class="icon-label">{{ character.name }} [Level {{ character.level }}]</span>
+								<img src="images/icon_character.svg" alt="character" class="img-responsive icon"></image>
+							</p>
+							<progressbar animate="true" type="danger" value="(character.hp * 100) / character.hpmax" max="100">
+								HP {{ character.hp }}/{{ character.hpmax }}
+							</progressbar>
+							<progressbar animate="true" value="(character.mp * 100) / character.mpmax" max="100">
+								MP {{ character.mp }}/{{ character.mpmax }}
+							</progressbar>
+							<progressbar animate="true" type="success" value="(character.xp * 100) / character.xpup" max="100">
+								EXP {{ character.xp }}/{{ character.xpup }}
+							</progressbar>
+						</div>
+						
+						<!-- Monster part -->
+						<div class="col-md-6">
+							<p>
+								<span class="icon-label">
+									<span class="{{ monster.prefix }}">
+										{{ monster.prefix }}
+									</span> 
+									{{ monster.name }} 
+									{{ monster.suffix }}
+								</span>
+								<img src="images/icon_monster.svg" alt="monster" class="img-responsive icon"></image>
+							</p>
+							<progressbar animate="true" type="danger" value="(monster.hp * 100) / monster.hpmax" max="100">
+								HP {{ monster.hp }}/{{ monster.hpmax }}
+							</progressbar>
+						</div>	
+					</div>
+					
+					<!-- Character config part -->
+					<div class="row">
+						<!-- Stats -->
+						<div class="col-md-6">
+							<h4>Stats</h4>
+							<div class="row stats-row" ng-repeat="attribute in character.attributes">
+								<div class="col-md-5 col-xs-8">
+									<img ng-src="images/icon_{{ attribute.name }}.svg" class="img-responsive stats-icon"
+										popover-placement="right" popover="{{ attribute.description }}" 
+										popover-trigger="mouseenter" popover-append-to-body='true'></image>
+									<span class="stats-icon-label">{{ attribute.name }}</span>
+								</div>
+								<div class="col-md-5 col-xs-3">
+									<span class="stats-icon-label" ng-class="{'buff' : attribute.buff + attribute.spent > 0}">
+										{{ attribute.base + attribute.buff + attribute.spent }}
+									</span>
+									<span class="stats-icon-label">({{ attribute.base }})</span>
+								</div>
+								<div class="col-md-2 col-xs-1">
+									<span class="glyphicon glyphicon-minus stats-icon-label"
+										ng-class="{'color-glyphicon-minus' : attribute.spent > 0}"
+										ng-click="character.unspendAp(attribute)"></span>
+									<span class="glyphicon glyphicon-plus stats-icon-label" 
+										ng-class="{'color-glyphicon-plus' : character.unspentAP > 0}"
+										ng-click="character.spendAp(attribute)"></span>
+								</div>
+							</div>
+							<p id="unspentAP">Unspent Attribute Points: {{ character.unspentAP }}</p>
+							<button type="button" class="btn btn-default btn-sm btn-block" 
+								ng-disabled="isApplyApDisabled()" ng-click="character.applyAp()">Apply Attribute Points</button>
+						</div>		
+						<!-- Equipment -->
+						<div class="col-md-6">
+							<h4>Equipment</h4>
+							<div class="container equipment-container">
+							<image src="images/icon_man.svg" class="img-responsive equipment-base-icon" ></image>
+							<image ng-repeat="eq in character.equipment" ng-src="images/items/{{ eq.item.rarity }}.svg" 
+								class="img-responsive equipment-rarity-icon" id="equipment-{{ eq.type }}"></image>
+							<image ng-repeat="eq in character.equipment" ng-src="images/items/{{ eq.item.icon }}.svg" 
+								class="img-responsive equipment-overlay-icon" id="equipment-{{ eq.type }}"
+								popover-placement="top" popover-html-unsafe="{{ eq.item.description }}" 
+								popover-trigger="mouseenter" popover-append-to-body='true'></image>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Backpart part-->
+				<div class="col-md-4">
+					<tabset>
+						<!-- Backpack -->
+						<tab>
+							<tab-heading>
+								<span class="tab-icon-label">Backpack</span>
+								<image src="images/icon_backpack.svg" class="img-responsive tab-icon"></image>
+							</tab-heading>
+							<div class="list-group item-list side-tab-panel">
+								<a class="list-group-item" ng-repeat="item in item.list track by $index"
+									popover-placement="left" popover-html-unsafe="{{ item.description}}" 
+									popover-trigger="mouseenter" popover-append-to-body='true'>
+									<span class="item-icon-label" ng-class="item.rarity">{{ item.name }}</span>
+									<image ng-src="images/items/icon_{{ item.icon }}.svg" class="img-responsive item-icon"></image>
+									<span style="float: right">
+										<span ng-show="canEquip(item)">
+											<span class="action" ng-click="equip(item, $index)">equip</span> | 
+										</span>
+										<span class="action" ng-click="sell($index)">sell</span>
+									</span>
+
+
+								</a>
+							</div>	
+						</tab>
+						
+						<!-- Combatlog -->
+						<tab>
+							<tab-heading>
+								<span class="tab-icon-label">Combatlog</span>
+								<image src="images/icon_combatlog.svg" class="img-responsive tab-icon"></image>
+							</tab-heading>
+							<div class="list-group side-tab-panel">
+								<div ng-repeat="item in combatlog.log track by $index">
+									<span ng-bind-html="item"></span>
+								</div>
+							</div>	
+						</tab>
+					</tabset>
+				</div>		
+			</div>	
+			
+		</div>
+	</body>
+</html>

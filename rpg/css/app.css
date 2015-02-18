@@ -1,0 +1,243 @@
+/* rpgApp CSS stylesheet */
+
+/* Colors scheme
+ * red: #D9534F
+ * green: #5CB85C
+ * yellow: #E8B200
+ * blue: #3073AD
+ * grey: #222222
+ * purple: #B736DE
+ */
+
+/*
+ * Base structure
+ */
+
+body {
+	padding-top: 70px;
+}
+
+.navbar-fixed-top {
+  border: 0;
+}
+
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+
+/*
+ * Uncategorized changes
+ */
+
+.center {
+	text-align: center;
+}
+
+.btn {
+	color: #3073AD;
+}
+
+.icon {
+	float: left;
+	padding-right: 10px;
+}
+
+.stats-icon {
+	float: left;
+	padding-right: 10px;
+}
+
+.icon-label {
+	font-size: 14pt;
+	line-height: 40px;
+}
+
+.stats-icon-label {
+	line-height: 30px;
+}
+
+.stats-row {
+	padding: 2px 0px;
+}
+
+.main-row {
+	padding: 10px 0px;
+}
+
+.buff { color: #E8B200; }
+.req { color: #3073AD; }
+.action { color: #3073AD; }
+
+#stage {
+	padding-left: 30px;
+	padding-right: 30px;
+	font-size: 14pt;
+}
+
+#flair {
+	padding-top: 20px;
+	padding-bottom: 30px;
+}
+
+#unspentAP {
+	padding-top: 25px;
+	padding-bottom: 0px;
+	text-align: center;
+}
+
+
+/*
+ * Sidepanel
+ */
+
+.side-tab-panel {
+	padding-top: 10px;
+	height: 500px;
+	overflow-y: scroll;
+}
+
+.tab-icon {
+	float: left;
+	padding-right: 10px;
+}
+
+.tab-icon-label {
+	line-height: 30px;
+}
+
+.item-icon {
+	float: left;
+	padding-right: 10px;	
+}
+
+.item-icon-label {
+	line-height: 20px;
+}
+
+.item-list .list-group-item{
+	border-right: 0px;
+	border-left: 0px;
+}
+
+.item-list .list-group-item:first-child {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-top: 0px;
+}
+
+.item-list .list-group-item:last-child {
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.Uncommon {
+	color: #3073AD;
+}
+
+.Rare {
+	color: #5CB85C;
+}
+
+.Legendary {
+	color: #B736DE;
+}
+
+
+/*
+ * Equipment field
+ */
+
+.equipment-container {
+	position: relative; 
+	min-height: 250px; 
+	width: 250px; 
+	margin: 0 auto;
+}
+
+.equipment-base-icon {
+	position: absolute; 
+	z-index: 0;
+}
+
+.equipment-rarity-icon {
+	position: absolute; 
+	z-index: 1; 
+}
+
+.equipment-overlay-icon {
+	position: absolute; 
+	z-index: 2; 
+}
+
+#equipment-Helm {
+	margin-left: 110px; 
+	margin-top: 3.5px;
+}
+
+#equipment-Necklace {
+	margin-left: 183px; 
+	margin-top: 49.5px;
+}
+
+#equipment-Armor {
+	margin-left: 183px; 
+	margin-top: 164.5px;
+}
+
+#equipment-Shield {
+	margin-left: 210px; 
+	margin-top: 107.5px;
+}
+
+#equipment-Shoes {
+	margin-left: 111px; 
+	margin-top: 217px;
+}
+
+#equipment-Pants {
+	margin-left: 28.5px; 
+	margin-top: 166px;
+}
+
+#equipment-Weapon {
+	margin-left: 10px; 
+	margin-top: 107.5px;
+}
+
+#equipment-Bow {
+	margin-left: 10px; 
+	margin-top: 107.5px;
+}
+
+#equipment-Staff {
+	margin-left: 10px; 
+	margin-top: 107.5px;
+}
+
+#equipment-Ring {
+	margin-left: 24px; 
+	margin-top: 44.5px;
+}
+
+
+/*
+ * Prefix color scheme
+ */
+
+span.WEAKEST { color: #EE009E; }
+span.WEAK { color: #A000C0; }
+span.NORMAL { color: #3073AD; }
+span.STRONG { color: #C05A00; }
+span.STRONGEST { color: #A50000; }
+span.DMG { color: #D9534f; }
+
+span.DEFEATED { color: #D9534f; }
+span.GOLD { color: #E8B200; }
+span.XP { color: #3073AD; }
+
+/*
+ * Glyphicons
+ */
+
+.color-glyphicon-minus { color: #D9534F; }
+.color-glyphicon-plus { color: #5CB85C; }
+
+

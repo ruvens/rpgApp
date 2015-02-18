@@ -1,2 +1,2 @@
 # rpgApp
-Incremental RPG game
+Incremental RPG game based on AngularJS and bootstrap.
