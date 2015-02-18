@@ -192,7 +192,6 @@ Player.prototype.equip = function(item) {
 			}
 			this.changebuff(item, true);
 		
-			console.log(this.equipment);
 			return oldItem;
 		}
 	}
