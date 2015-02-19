@@ -35,22 +35,25 @@ rpgApp.constant('MonsterConfig', {
 
 rpgApp.constant('ItemConfig', [
 	{ type: 'Weapon', items: [
-		{ name: 'Sword', dmgmin: 4, dmgmax: 5, buff: [ { name:'HP', value: 5 }, { name:'Strength', value: 1 } ], req: [ { name:'Strength', value:5 } ] , icon: 'sword'}
+		{ name: 'Sword', subtype:'Sword', twohanded:false, dmgmin: 4, dmgmax: 5, buff: [ { name:'HP', value: 5 }, { name:'Strength', value: 1 } ], req: [ { name:'Strength', value:5 } ] , icon: 'sword'},
+		{ name: 'Bow', subtype:'Bow', twohanded:true, dmgmin: 4, dmgmax: 5, buff: [ { name:'HP', value: 5 }, { name:'Strength', value: 1 } ], req: [ { name:'Strength', value:1 }, { name:'Agility', value:5 } ] , icon: 'bow'},
+		{ name: 'Staff', subtype:'Staff', twohanded:true, dmgmin: 4, dmgmax: 5, buff: [ { name:'HP', value: 5 }, { name:'Strength', value: 1 } ], req: [ { name:'Strength', value:1 }, { name:'Intelligence', value:5 } ] , icon: 'staff'},
+		{ name: 'Mace', subtype:'Mace', twohanded:false, dmgmin: 4, dmgmax: 5, buff: [ { name:'HP', value: 5 }, { name:'Strength', value: 1 } ], req: [ { name:'Strength', value:1 }, { name:'Wisdom', value:5 } ] , icon: 'mace'}
 	]},
 	{ type: 'Shield', items: [
-		{ name: 'Wooden Shield', armor: 3, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:50 } ], icon: 'shield' }
+		{ name: 'Wooden Shield', armor: 3, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:10 } ], icon: 'shield' }
 	]},
 	{ type: 'Helm', items: [
-		{ name: 'Leather Helmet', armor: 1,  buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:50 } ], icon: 'helm' }
+		{ name: 'Leather Helmet', armor: 1,  buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:5 } ], icon: 'helm' }
 	]},
 	{ type: 'Armor', items: [
-		{ name: 'Leather Armor', armor: 4, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:50 } ], icon: 'armor' }
+		{ name: 'Leather Armor', armor: 4, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:5 } ], icon: 'armor' }
 	]},
 	{ type: 'Pants', items: [
-		{ name: 'Leather Pants', armor: 2, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:50 } ], icon: 'pants' }
+		{ name: 'Leather Pants', armor: 2, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:5 } ], icon: 'pants' }
 	]},
 	{ type: 'Shoes', items: [
-		{ name: 'Leather Shoes', armor: 1, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:50 } ], icon: 'shoes' }
+		{ name: 'Leather Shoes', armor: 1, buff: [ { name:'HP', value: 5} ], req: [ { name:'Endurance', value:5 } ], icon: 'shoes' }
 	]},
 	{ type: 'Ring', items: [
 		{ name: 'Iron Ring', buff: [ { name:'HP', value: 5}, { name:'Strength', value: 1 } ], req: [ { name:'Intelligence', value:5 } ], icon: 'ring' }

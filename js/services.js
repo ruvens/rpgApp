@@ -72,13 +72,14 @@ rpgApp.service('Items', ['ItemConfig', 'RarityConfig', function(ItemConfig, Rari
 	this.chance = 0.5;
 	
 	this.new = function(stage) {
+		// First: Choose Item type
 		var tmpType = randInt(0, ItemConfig.length);
-		var tmpLevel = randInt(stage-1, stage+3);
-
-		// Load random item template
+		// Second: Choose item level +- 3 levels around stage
+		var tmpLevel = randInt(Math.max(stage-3, 1), stage+4);
+		// Third: Load random item template from item type
 		var newItem = this._clone(ItemConfig[tmpType].items[randInt(0, ItemConfig[tmpType].items.length)]);
 		
-		// Load Rarity
+		// Fourth: Load Rarity
 		var tmpRarity = Math.random();
 		var numBuffs = 0;
 		var total = 0;
@@ -92,7 +93,8 @@ rpgApp.service('Items', ['ItemConfig', 'RarityConfig', function(ItemConfig, Rari
 			}
 		}	
 		
-		// Add  specific properties
+		// Add specific properties
+		newItem.level = tmpLevel;
 		newItem.type = ItemConfig[tmpType].type;
 		if (newItem.type == 'Weapon') {
 			newItem.dmgmin = tmpLevel * newItem.dmgmin;
@@ -126,6 +128,11 @@ rpgApp.service('Items', ['ItemConfig', 'RarityConfig', function(ItemConfig, Rari
 		}
 		newItem.buff = tmpBuff;
 		
+		// Adjust requirements
+		for (var i = 0; i < newItem.req.length; i++) {
+			newItem.req[i].value = tmpLevel * newItem.req[i].value;
+		}
+		
 		newItem.description = this._generateDescription(newItem);
 		
 		this.list.push(newItem);
@@ -136,7 +143,12 @@ rpgApp.service('Items', ['ItemConfig', 'RarityConfig', function(ItemConfig, Rari
 		var description = '';
 		
 		description = '<span class="' + item.rarity +'">' + item.name + '</span><br/>';
-		description += '<i>' + item.type + '</i><br/>';
+		if (item.twohanded){
+			description += '<i>' + item.type + ', Two-Handed</i><br/>';
+		} else {
+			description += '<i>' + item.type + '</i><br/>';
+		}
+		description += 'Item level ' + item.level + '<br/>';
 		description += '<br/>';
 		if (item.dmgmin) {
 			description += 'Damage: <span class="DMG">' + item.dmgmin + '-' + item.dmgmax + '</span><br/>';

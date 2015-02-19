@@ -16,23 +16,20 @@ var Character = function(cname, hpmax, mpmax, baseattr, dmgmin, dmgmax, crit, cr
 	this.attributes = [
 		{ name: 'Strength', base: baseattr[0], buff: 0, spent: 0,
 			description : 'Strength is the physical power of your character. It is the requirement'
-			 	+ 'to wield mightier weapons. Every 5 strength increase your meele minimal damage by '
-				+ '1 and maximal damage by 2.' },
+			 	+ 'to wield mightier weapons.' },
 		{ name: 'Endurance', base: baseattr[1], buff: 0, spent: 0,
 			description : 'Endurance helps you to stay in battle longer. It is the key requirement'
-				+ 'for any sort of armor. Every 5 endurance grant you 1 more maximal health point on'
-				+ 'level up.' },
+				+ 'for any sort of armor.' },
 		{ name: 'Agility', base: baseattr[2], buff: 0, spent: 0,
 			description : 'Agility measures your speed and dexterity. It is the key requirement'
-				+ 'for bows. More agility gives a higher chance for evades. Every 10 agility incrase'
-				+ 'the minimal damage of bows by 1 and maximal damage by 2. [not implemented yet]' },
+				+ 'for bows. More agility gives a higher chance for evades. It increases the damage' 
+		 		+ ' of bows.'},
 		{ name: 'Intelligence', base: baseattr[3], buff: 0, spent: 0,
 			description : 'Intelligence helps you to outwit your foe. It is the key requirement'
-				+ 'for wands and jewelery. Every 5 Intelligence increase the minimal damage of wands'
-				+ 'by 1 and the maximal damage by 2. [not implemented yet]' },
+				+ 'for wands and jewelery. It increases the damages of staffs' },
 		{ name: 'Wisdom', base: baseattr[4], buff: 0, spent: 0,
 			description : 'Wisdom is the knowledge you gathered about the world. It is a secondary'
-				+ 'requirement for many equipment pieces. It increases your defensive spells. [not implemented yet]' }
+				+ 'requirement for many equipment pieces. It increases the damage of maces' }
 	];
 	
 	// Secondary stats
@@ -125,7 +122,19 @@ Player.prototype.constructor = Player;
 
 Player.prototype.addAttributeDmg = function() {
 	// Add different Attribute Damages depending on weapons work
-	return 1;
+	if (this.equipment[0].item) {
+		if (this.equipment[0].item.subtype == 'Bow') {
+			return Math.floor((this.attributes[0].base + this.attributes[0].buff) / 10 + 
+						(this.attributes[2].base + this.attributes[2].buff) / 10);
+		} else if (this.equipment[0].item.subtype == 'Staff') {
+			return Math.floor((this.attributes[0].base + this.attributes[0].buff) / 10 + 
+						(this.attributes[3].base + this.attributes[3].buff) / 10);
+		} else if (this.equipment[0].item.subtype == 'Mace') {
+			return Math.floor((this.attributes[0].base + this.attributes[0].buff) / 10 + 
+						(this.attributes[4].base + this.attributes[4].buff) / 10);
+		} 
+	}
+	return Math.floor((this.attributes[0].base + this.attributes[0].buff - 20) / 5);
 }
 
 Player.prototype.levelUp = function() {
@@ -175,21 +184,27 @@ Player.prototype.applyAp = function() {
 	}
 }
 
+Player.prototype.unequip = function(index) {
+	var oldItem = this.equipment[index].item;
+	this.equipment[index].item = null;
+	if (oldItem) {
+		if (oldItem.dmgmin) {
+			this.dmgmin -= oldItem.dmgmin;
+			this.dmgmax -= oldItem.dmgmax;	
+		}
+		if (oldItem.armor) {
+			this.ac -= oldItem.armor;
+		}
+		this.changebuff(oldItem, false);
+	}	
+	return oldItem;
+}
+
 Player.prototype.equip = function(item) {
 	for (var i = 0; i < this.equipment.length; i++) {
 		if (this.equipment[i].type == item.type) {
 			// Unequip previous item
-			var oldItem = this.equipment[i].item;
-			if (oldItem) {
-				if (oldItem.dmgmin) {
-					this.dmgmin -= oldItem.dmgmin;
-					this.dmgmax -= oldItem.dmgmax;	
-				}
-				if (oldItem.armor) {
-					this.ac -= oldItem.armor;
-				}
-				this.changebuff(oldItem, false);
-			}
+			var oldItem = this.unequip(i);
 
 			// Equip new item
 			this.equipment[i].item = item;

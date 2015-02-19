@@ -92,6 +92,24 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 		if (oldItem) {
 			$scope.item.list.push(oldItem);
 		}
+		
+		// If twohanded weapon gets equiped, unequip off-hand
+		if (item.twohanded) {
+			oldItem = $scope.character.unequip(1);
+			if (oldItem) {
+				$scope.item.list.push(oldItem);
+			}
+		}
+		
+		// If off-hand items gets equiped, unequip two-handed weapons
+		if (item.type == 'Shield') {
+			if ($scope.character.equipment[0].item.twohanded) {
+				oldItem = $scope.character.unequip(0);
+				if (oldItem) {
+					$scope.item.list.push(oldItem);
+				}
+			}
+		}
 	}
 	
 	$scope.canEquip = function(item) {

@@ -122,13 +122,15 @@
 						<div class="col-md-6">
 							<h4>Equipment</h4>
 							<div class="container equipment-container">
-							<image src="images/icon_man.svg" class="img-responsive equipment-base-icon" ></image>
-							<image ng-repeat="eq in character.equipment" ng-src="images/items/{{ eq.item.rarity }}.svg" 
-								class="img-responsive equipment-rarity-icon" id="equipment-{{ eq.type }}"></image>
-							<image ng-repeat="eq in character.equipment" ng-src="images/items/{{ eq.item.icon }}.svg" 
-								class="img-responsive equipment-overlay-icon" id="equipment-{{ eq.type }}"
-								popover-placement="top" popover-html-unsafe="{{ eq.item.description }}" 
-								popover-trigger="mouseenter" popover-append-to-body='true'></image>
+								<image src="images/icon_man.svg" class="img-responsive equipment-base-icon" ></image>
+								<div ng-repeat="eq in character.equipment">
+									<image ng-show="eq.item.rarity" ng-src="images/items/{{ eq.item.rarity }}.svg" 
+										class="img-responsive equipment-rarity-icon" id="equipment-{{ eq.type }}"></image>
+									<image ng-show="eq.item.icon"ng-src="images/items/{{ eq.item.icon }}.svg" 
+										class="img-responsive equipment-overlay-icon" id="equipment-{{ eq.type }}"
+										popover-placement="top" popover-html-unsafe="{{ eq.item.description }}" 
+										popover-trigger="mouseenter" popover-append-to-body='true'></image>
+								</div>
 							</div>
 						</div>
 					</div>
