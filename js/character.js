@@ -16,20 +16,20 @@ var Character = function(cname, hpmax, mpmax, baseattr, dmgmin, dmgmax, crit, cr
 	this.attributes = [
 		{ name: 'Strength', base: baseattr[0], buff: 0, spent: 0,
 			description : 'Strength is the physical power of your character. It is the requirement'
-			 	+ 'to wield mightier weapons.' },
+			 	+ ' to wield mightier weapons.' },
 		{ name: 'Endurance', base: baseattr[1], buff: 0, spent: 0,
 			description : 'Endurance helps you to stay in battle longer. It is the key requirement'
-				+ 'for any sort of armor.' },
+				+ ' for any sort of armor.' },
 		{ name: 'Agility', base: baseattr[2], buff: 0, spent: 0,
 			description : 'Agility measures your speed and dexterity. It is the key requirement'
-				+ 'for bows. More agility gives a higher chance for evades. It increases the damage' 
+				+ ' for bows. More agility gives a higher chance for evades. It increases the damage' 
 		 		+ ' of bows.'},
 		{ name: 'Intelligence', base: baseattr[3], buff: 0, spent: 0,
 			description : 'Intelligence helps you to outwit your foe. It is the key requirement'
-				+ 'for wands and jewelery. It increases the damages of staffs' },
+				+ ' for wands and jewelery. It increases the damage of staffs' },
 		{ name: 'Wisdom', base: baseattr[4], buff: 0, spent: 0,
 			description : 'Wisdom is the knowledge you gathered about the world. It is a secondary'
-				+ 'requirement for many equipment pieces. It increases the damage of maces' }
+				+ ' requirement for many equipment pieces. It increases the damage of maces' }
 	];
 	
 	// Secondary stats

@@ -50,6 +50,11 @@ rpgApp.service('Combatlog', function CombatlogService() {
 		this._limitLog();
 	}
 	
+	this.addItem = function(item) {
+		this.log.unshift(getTimestamp() + ' You received <span class="' + item.rarity + '">' + item.name + '</span>');
+		this._limitlog();
+	}
+	
 	this._limitLog = function() {
 		if (this.log.length > this.limit) {
 			this.log.pop();
@@ -69,7 +74,7 @@ rpgApp.service('Combatlog', function CombatlogService() {
 rpgApp.service('Items', ['ItemConfig', 'RarityConfig', function(ItemConfig, RarityConfig) {
 	this.list = [];
 	this.limit = 30;
-	this.chance = 0.5;
+	this.chance = 0.33;
 	
 	this.new = function(stage) {
 		// First: Choose Item type
@@ -206,21 +211,21 @@ rpgApp.service('MonsterFactory', ['MonsterConfig', function(MonsterConfig) {
 		var suffix = randInt(0, MonsterConfig.suffix.length);
 
 		// HP
-		var hpmax = MonsterConfig.monster[mname].hp * stage;
+		var hpmax = (MonsterConfig.monster[mname].hp + stage / 4) * stage;
 		hpmax = Math.floor(hpmax * MonsterConfig.suffix[suffix].hpmod);
 
 		// DMG
-		var dmgmin = Math.pow(randInt(0, stage),2) + 1;
-		var dmgmax = randInt(0, stage * 2) * 7 + dmgmin;
+		var dmgmin = stage * Math.log(stage) * 6 + 1;
+		var dmgmax = dmgmin + stage * Math.log(stage);
 
 		var baseattr = [20, 20, 20, 20, 20];
 
 		// Calculate Combat Power
-		var cp = (hpmax * 1) + (dmgmin * 5) + (dmgmax * 2)
+		var cp = hpmax + dmgmin + dmgmax
 		cp = Math.floor(cp * MonsterConfig.prefix[prefix].value);
 
-		var xp = Math.floor(cp/10) +1;
-		var gold = cp;
+		var xp = Math.floor(cp/30) +1;
+		var gold = Math.floor(cp/10) +1;
 	
 		return (new Monster(MonsterConfig.monster[mname].name, hpmax, 0, baseattr, dmgmin, dmgmax,
 			MonsterConfig.prefix[prefix].name, MonsterConfig.suffix[suffix].name, xp, gold));

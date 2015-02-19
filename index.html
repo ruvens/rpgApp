@@ -88,7 +88,7 @@
 					</div>
 					
 					<!-- Character config part -->
-					<div class="row">
+					<div class="row main-row">
 						<!-- Stats -->
 						<div class="col-md-6">
 							<h4>Stats</h4>
@@ -134,6 +134,25 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- Ability part -->
+					<div class="row main-row">
+						<!-- Secondary Stats -->
+						<div class="col-md-6">
+							<!-- <h4>Secondary Stats</h4>
+							<p>
+								Armor: {{ character.ac }}
+							</p>-->
+						</div>		
+						<!-- Loot -->
+						<div class="col-md-6">
+							<!--
+							<h4>Loot</h4>
+							<p>
+								Gold: <span class="GOLD">${{ character.gold }}</span>
+							</p>-->
+						</div>
+					</div>
 				</div>
 				
 				<!-- Backpart part-->
@@ -157,8 +176,6 @@
 										</span>
 										<span class="action" ng-click="sell($index)">sell</span>
 									</span>
-
-
 								</a>
 							</div>	
 						</tab>

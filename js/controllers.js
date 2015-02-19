@@ -46,7 +46,7 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 			
 			if (Math.random() <= $scope.item.chance) {
 				if ($scope.item.list.length <= $scope.item.limit) {
-					$scope.item.new($scope.stage);					
+					$scope.combatlog.addItem($scope.item.new($scope.stage));					
 				} 
 			}
 
