@@ -93,7 +93,7 @@
 						<div class="col-md-6">
 							<h4>Stats</h4>
 							<div class="row stats-row" ng-repeat="attribute in character.attributes">
-								<div class="col-md-5 col-xs-8">
+								<div class="col-md-5 col-xs-7">
 									<img ng-src="images/icon_{{ attribute.name }}.svg" class="img-responsive stats-icon"
 										popover-placement="right" popover="{{ attribute.description }}" 
 										popover-trigger="mouseenter" popover-append-to-body='true'></image>
@@ -105,7 +105,7 @@
 									</span>
 									<span class="stats-icon-label">({{ attribute.base }})</span>
 								</div>
-								<div class="col-md-2 col-xs-1">
+								<div class="col-md-2 col-xs-2">
 									<span class="glyphicon glyphicon-minus stats-icon-label"
 										ng-class="{'color-glyphicon-minus' : attribute.spent > 0}"
 										ng-click="character.unspendAp(attribute)"></span>

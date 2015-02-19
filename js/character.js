@@ -49,9 +49,9 @@ Character.prototype.doDmg = function() {
 	
 	if (Math.random() <= this.crit) {
 		tmpCrit = true;
-		tmpDmg = this.dmgmax * this.critm;
+		tmpDmg = this.dmgmax * this.critm + this.addAttributeDmg();
 	} else {
-		tmpDmg = Math.floor(randInt(this.dmgmin, this.dmgmax+1) + (this.attributes[0].base + this.attributes[0].buff - 20) / 5);
+		tmpDmg = randInt(this.dmgmin, this.dmgmax+1) + this.addAttributeDmg();
 	}
 	
 	return {
@@ -59,6 +59,11 @@ Character.prototype.doDmg = function() {
 		attack: this.attack,
 		isCrit: tmpCrit
 	}
+}
+
+Character.prototype.addAttributeDmg = function() {
+	// Only strength based increase in basic version
+	return Math.floor((this.attributes[0].base + this.attributes[0].buff - 20) / 5);
 }
 
 Character.prototype.takeDmg = function(dmg, attack) {
@@ -117,6 +122,11 @@ var Player = function(cname, hpmax, mpmax, baseattr, dmgmin, dmgmax) {
 
 Player.prototype = Object.create(Character.prototype);
 Player.prototype.constructor = Player;
+
+Player.prototype.addAttributeDmg = function() {
+	// Add different Attribute Damages depending on weapons work
+	return 1;
+}
 
 Player.prototype.levelUp = function() {
 	this.level++;
