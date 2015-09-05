@@ -24,7 +24,7 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 	}*/
 
 	// Init: Player character
-	var loadedChar = localStorageService.get('rpgApp.character');
+	var loadedChar = localStorageService.get('character');
 	console.log('loadedCharacter: ', loadedChar);
 	if (loadedChar != null) {
 		$scope.character = PlayerFactory.load(loadedChar);
