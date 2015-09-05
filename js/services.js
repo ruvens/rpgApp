@@ -269,7 +269,7 @@ rpgApp.service('PlayerFactory', function () {
 						player.attributes[1].base, 
 						player.attributes[2].base, 
 						player.attributes[3].base, 
-						player.attributes[4].base]
+		player.attributes[4].base];
 		return (new Player(player.name, player.hpmax, player.mpmax, baseattr, player.dmgmin, player.dmgmax));
 	}
 });
