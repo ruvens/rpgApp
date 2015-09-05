@@ -7,8 +7,8 @@
  *	as interval every second.
  */
 rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'MonsterFactory', 
-									'Items', 'Combatlog',
-	function ($scope, $interval, PlayerFactory, MonsterFactory, Items, Combatlog) {
+									'Items', 'Combatlog', 'localStorageService',
+	function ($scope, $interval, PlayerFactory, MonsterFactory, Items, Combatlog, localStorageService) {
 	
 	// Controller and scope initialization
 	$scope.stage = 1;
@@ -18,10 +18,24 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 	
 	// Init: Items
 	$scope.item = Items;
-	$scope.item.new($scope.stage);
+	/*var backpack = localStorageService.get('rpgApp.backpack');
+	if (backpack) {
+		$scope.item.list = backpack;
+	}*/
 
 	// Init: Player character
-	$scope.character = PlayerFactory.new();
+	var loadedChar = localStorageService.get('rpgApp.character');
+	if (loadedChar) {
+		$scope.character = PlayerFactory.load(loadedChar);
+	} else {
+		$scope.character = PlayerFactory.new();
+	} 
+	//	$scope.character = PlayerFactory.new();
+	
+	var retObj = localStorageService.get('character');
+	console.log('retrievedObject: ', retObj);
+	console.log('attributes', retObj.attributes[0].base);
+	//console.log('parsedObject: ', JSON.parse(retObj));
 	
 	// Init: Monster
 	$scope.monster = MonsterFactory.new($scope.stage);
@@ -64,6 +78,9 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 				$scope.combatlog.addEncounter($scope.monster);
 			}
 		}	
+		
+		localStorageService.set('character', $scope.character);
+		localStorageService.set('backpack', $scope.item.list);
 	}, 1000);
 
 	// View Control functions

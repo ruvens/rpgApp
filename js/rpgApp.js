@@ -1,6 +1,6 @@
 'use strict';
 
-var rpgApp = angular.module('rpgApp', ['ui.bootstrap', 'ngSanitize']);
+var rpgApp = angular.module('rpgApp', ['ui.bootstrap', 'ngSanitize', 'LocalStorageModule']);
 
 /*
  * Configuration
@@ -69,3 +69,8 @@ rpgApp.value('RarityConfig', [
 	{ name: 'Uncommon', prob: 0.25, effect:1 },
 	{ name: 'Common', prob: 0.7, effect:0 }
 ]);
+
+rpgApp.config(function (localStorageServiceProvider) {
+  localStorageServiceProvider
+    .setPrefix('rpgApp');
+});

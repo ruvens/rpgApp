@@ -52,7 +52,7 @@ rpgApp.service('Combatlog', function CombatlogService() {
 	
 	this.addItem = function(item) {
 		this.log.unshift(getTimestamp() + ' You received <span class="' + item.rarity + '">' + item.name + '</span>');
-		this._limitlog();
+		this._limitLog();
 	}
 	
 	this._limitLog = function() {
@@ -253,6 +253,19 @@ rpgApp.service('PlayerFactory', function () {
 		var dmgmax = 15;
 	
 		return (new Player(cname, hpmax, mpmax, baseattr, dmgmin, dmgmax));
+	}
+	
+	this.serialize = function(player) {
+		var serial = {};
+		serial.name = player.name;
+		serial.level = player.level
+		serial.hpmax = player.hpmax;
+		serial.mpmax = player.mpmax;
+		
+	}
+	
+	this.load = function(player) {
+		return (new Player(player.name, player.hpmax, player.mpmax, player.baseattr, player.dmgmin, player.dmgmax));
 	}
 });
 
