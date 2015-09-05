@@ -24,13 +24,14 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 	}*/
 
 	// Init: Player character
+	/*
 	var loadedChar = localStorageService.get('rpgApp.character');
 	if (loadedChar) {
 		$scope.character = PlayerFactory.load(loadedChar);
 	} else {
 		$scope.character = PlayerFactory.new();
-	} 
-	//	$scope.character = PlayerFactory.new();
+	} */
+	$scope.character = PlayerFactory.new();
 	
 	var retObj = localStorageService.get('character');
 	console.log('retrievedObject: ', retObj);
