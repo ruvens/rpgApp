@@ -34,7 +34,7 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 	$scope.character = PlayerFactory.new();
 	
 	var retObj = localStorageService.get('character');
-	if (retObj) {
+	if (retObj != null) {
 		console.log('retrievedObject: ', retObj);
 		console.log('attributes', retObj.attributes[0].base);
 		//console.log('parsedObject: ', JSON.parse(retObj));
