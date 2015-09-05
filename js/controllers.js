@@ -82,8 +82,8 @@ rpgApp.controller('rpgController', ['$scope', '$interval', 'PlayerFactory', 'Mon
 			}
 		}	
 		
-		localStorageService.set('character', $scope.character);
-		localStorageService.set('backpack', $scope.item.list);
+		localStorageService.setItem('character', $scope.character);
+		localStorageService.setItem('backpack', $scope.item.list);
 	}, 1000);
 
 	// View Control functions
