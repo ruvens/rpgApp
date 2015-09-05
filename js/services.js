@@ -265,7 +265,12 @@ rpgApp.service('PlayerFactory', function () {
 	}
 	
 	this.load = function(player) {
-		return (new Player(player.name, player.hpmax, player.mpmax, player.baseattr, player.dmgmin, player.dmgmax));
+		var baseattr = [player.baseattr[0].base, 
+						player.baseattr[1].base, 
+						player.baseattr[2].base, 
+						player.baseattr[3].base, 
+						player.baseattr[4].base, ]
+		return (new Player(player.name, player.hpmax, player.mpmax, baseattr, player.dmgmin, player.dmgmax));
 	}
 });
 
