@@ -18,21 +18,21 @@ rpgApp.service('Combatlog', function CombatlogService() {
 				+ monster.name + '</span> causes <span class="DMG">' 
 				+ dmg + '</span> to You');		
 		}
-		this._limitLog();
+		this.limitLog();
 	}
 	
 	this.addMonsterDeath = function(monster) {
 		this.log.unshift(getTimestamp() + ' <span class="' + monster.prefix + '">' 
 			+ monster.name + '</span> ' 
 			+ monster.suffix + ' is <span class="DEFEATED">defeated!</span>');	
-		this._limitLog();
+		this.limitLog();
 	}
 	
 	this.addEncounter = function(monster) {
 		this.log.unshift(getTimestamp() + ' You meet' + ' <span class="' + monster.prefix
 			+ '">' + monster.name + '</span> '
 			+ monster.suffix);	
-		this._limitLog();	
+		this.limitLog();	
 	}
 	
 	this.addPlayerDeath = function() {
@@ -42,20 +42,20 @@ rpgApp.service('Combatlog', function CombatlogService() {
 	
 	this.addXpGain = function(xp) {
 		this.log.unshift(getTimestamp() + ' You earned <span class="XP">' + xp + '</span> experience!');
-		this._limitLog();
+		this.limitLog();
 	}
 	
 	this.addGoldGain = function(gold) {
 		this.log.unshift(getTimestamp() + ' You earned <span class="GOLD">$' + gold + '</span> gold!');
-		this._limitLog();
+		this.limitLog();
 	}
 	
 	this.addItem = function(item) {
 		this.log.unshift(getTimestamp() + ' You received <span class="' + item.rarity + '">' + item.name + '</span>');
-		this._limitLog();
+		this.limitLog();
 	}
 	
-	this._limitLog = function() {
+	this.limitLog = function() {
 		if (this.log.length > this.limit) {
 			this.log.pop();
 		}
