@@ -265,7 +265,6 @@ rpgApp.service('PlayerFactory', function () {
 	}
 	
 	this.load = function(player) {
-		console.log('Baseattr: ', player.attributes[0])
 		var baseattr = [player.attributes[0].base, 
 						player.attributes[1].base, 
 						player.attributes[2].base, 
